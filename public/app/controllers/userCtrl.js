@@ -60,16 +60,20 @@ angular.module('userCtrl', ['userService'])
 })
 
 .controller('userLoginController', function(Auth){
+	console.log("booting userLoginController")
 	var vm = this;
-
+	vm.loginData = {}
 
 	vm.doLogin = function(){
-		console.log("running do login")
 		Auth.login(vm.loginData.username, vm.loginData.password)
 			.success(function(data){
 				if(data.success === false){
 					vm.error = data.message
+				} else {
+					vm.loginData = {}
 				}
+
+
 			})
 	}
 })
