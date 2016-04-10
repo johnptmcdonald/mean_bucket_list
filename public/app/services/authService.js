@@ -3,14 +3,16 @@ console.log("loading authService.js")
 angular.module('authService', [])
 
 //factory for logging in/out
-.factory('Auth', function($http, $q, AuthToken){
+.factory('Auth', function($rootScope, $http, $q, AuthToken){
 	var authFactory = {}
 
 	//handle login
 	authFactory.login = function(username, password){
+		console.log("running auth.login")
 		return $http.post('/api/users/authenticate', {username: username, password: password})
 			.success(function(data){
 				AuthToken.setToken(data.token)
+				$rootScope.$broadcast('AUTH:login')
 				return data;
 			})	
 	}
@@ -18,6 +20,7 @@ angular.module('authService', [])
 	//handle logout
 	authFactory.logout = function(){
 		AuthToken.setToken()
+		$rootScope.$broadcast('AUTH:logout')
 	}
 
 	//check if user is logged in
