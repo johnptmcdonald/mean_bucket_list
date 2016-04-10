@@ -43,8 +43,20 @@ function show(req, res){
 	})
 }
 
+function me(req, res){
+	console.log(req.currentUser)
+	User.findById(req.currentUser, function(err, user){
+		if(err){
+			res.send(err)
+		}
+		res.json(user)
+	})
+}
+
+
 module.exports = {
 	create: create,
 	index: index,
-	show: show
+	show: show,
+	me: me
 }

@@ -11,7 +11,9 @@ function verifyToken(req, res, next){
 					message: 'failed to authenticate token'
 				})
 			} else {
+				console.log("jwt verified")
 				req.currentUser = decoded._id;
+				console.log(req.currentUser)
 				next()
 			}
 		})
