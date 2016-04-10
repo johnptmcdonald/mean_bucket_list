@@ -2,57 +2,38 @@ console.log("loading mainCtrl.js")
 angular.module('mainCtrl', [])
 
 .controller('mainController', function($rootScope, $scope, $location, Auth){
-
+	console.log("booting mainController")
+	// $scope.vm = vm
 	var vm = this;
-	console.log('running auth.isLoggedIn')
-	vm.loggedIn = Auth.isLoggedIn()
-	console.log(vm.loggedIn)
+	vm.loggedIn = Auth.isLoggedIn();
 
 	$rootScope.$on('$routeChangeStart', function(){
-		vm.loggedIn = Auth.isLoggedIn();
 		Auth.getUser()
 			.then(function(data){
 				vm.user = data.data
 			})
-
-
 	})
 
 	$scope.$on('AUTH:login', function(event, data){
-		console.log("$scope on login event triggered", event, data)
-		
+		console.log("$scope on login event triggered", event)
 		Auth.getUser()
 			.then(function(data){
-				console.log("running Auth.getUser")
+				console.log(data)
 				vm.loggedIn = true
 				vm.user = data.data
 				$location.path('/')
 			})
-
+	})
+	$scope.$on('AUTH:logout', function(event, data){
+		console.log("$scope on login event triggered", event)
+		vm.user = {}
+		vm.loggedIn = false
 	})
 
-	vm.doLogin = function(){
-		Auth.login(vm.loginData.username, vm.loginData.password)
-			.success(function(data){
-				vm.error = ''
-
-				console.log("about to get user")
-				Auth.getUser()
-					.then(function(data){
-						console.log("got user:" + data)
-						vm.user = data.data
-						$location.path('/');
-					})
-
-				if(data.success){
-					// $location.path('/');
-				}
-				else {
-					vm.error = data.message
-				}
-				
-			})
-	}
+	// vm.doLogin = function(){
+	// 	console.log("running do login")
+	// 	Auth.login(vm.loginData.username, vm.loginData.password)
+	// }
 
 	vm.doLogout = function(){
 		console.log("running doLogout")

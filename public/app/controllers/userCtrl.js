@@ -11,9 +11,6 @@ angular.module('userCtrl', ['userService'])
 			vm.users = data
 		})
 
-	$scope.$on('login', function(event, data){
-		console.log(event, data)
-	})
 
 	vm.deleteUser = function(id){
 		User.delete(id)
@@ -58,6 +55,21 @@ angular.module('userCtrl', ['userService'])
 				vm.processing = false;
 				vm.userData = {}
 				vm.data = data
+			})
+	}
+})
+
+.controller('userLoginController', function(Auth){
+	var vm = this;
+
+
+	vm.doLogin = function(){
+		console.log("running do login")
+		Auth.login(vm.loginData.username, vm.loginData.password)
+			.success(function(data){
+				if(data.success === false){
+					vm.error = data.message
+				}
 			})
 	}
 })

@@ -11,9 +11,12 @@ angular.module('authService', [])
 		console.log("running auth.login")
 		return $http.post('/api/users/authenticate', {username: username, password: password})
 			.success(function(data){
-				AuthToken.setToken(data.token)
-				$rootScope.$broadcast('AUTH:login')
-				return data;
+				if(data.success){
+					AuthToken.setToken(data.token)
+					$rootScope.$broadcast('AUTH:login')
+					return data;					
+				}
+
 			})	
 	}
 
