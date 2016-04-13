@@ -21,7 +21,7 @@ angular.module('mainCtrl', [])
 				console.log(data)
 				vm.loggedIn = true
 				vm.user = data.data
-				$location.path('/')
+				$location.path('/users/' + vm.user._id )
 			})
 	})
 	$scope.$on('AUTH:logout', function(event, data){

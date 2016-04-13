@@ -2,11 +2,13 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
 
+// rebuild this userSchema so as not to be many:many
 var UserSchema = new Schema({
 	username: {type: String, required: true, index: {unique: true}},
 	password: {type: String, required: true, select: false},
 	todos: [{type: mongoose.Schema.ObjectId, ref: 'Todo'}]
 })
+
 
 UserSchema.pre('save', function(next){
 	var user = this;

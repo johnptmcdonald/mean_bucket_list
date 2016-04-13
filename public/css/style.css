@@ -1,0 +1,9 @@
+* {
+	box-sizing: border-box;
+}
+
+.todo{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+

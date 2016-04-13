@@ -35,11 +35,9 @@ function index(req, res){
 }
 
 function show(req, res){
-	User.findById(req.params.user_id, function(err, user){
-		if(err){
-			res.send(err)
-		}
-		res.json(user)
+	User.findById(req.params.user_id).populate('todos').exec(function(err,data){
+		if(err) res.send(err)
+		res.send(data)
 	})
 }
 
@@ -52,7 +50,6 @@ function me(req, res){
 		res.json(user)
 	})
 }
-
 
 module.exports = {
 	create: create,

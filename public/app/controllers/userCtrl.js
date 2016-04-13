@@ -77,3 +77,29 @@ angular.module('userCtrl', ['userService'])
 			})
 	}
 })
+
+.controller('userShowController', function($routeParams, User){
+	console.log("booting userShowController")
+	var vm = this;
+	vm.user_id = $routeParams.user_id
+	
+	vm.todos = User.get(vm.user_id)
+		.success(function(data){
+			
+			vm.data = [];
+			var row = [];
+			for (var i = 0; i < data.todos.length; i++) {
+				if(i && i%3 === 0){
+					vm.data.push(row)
+					row = []
+				} 
+				row.push(data.todos[i])
+			};
+			
+		}) 
+})
+
+
+
+
+

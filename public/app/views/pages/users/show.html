@@ -1,0 +1,29 @@
+<div class="page-header text-center">
+	<h1>Your Todos</h1>
+</div>
+
+<div class="todos">
+	<div class="triplet" ng-repeat="triplet in user.data">
+		<div class="col-sm-4">
+			<div class="todo panel panel-default">
+				<div class="panel-body todo-panel">
+				{{triplet[0].body}}
+				</div>				
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="todo panel panel-default">
+				<div class="panel-body todo-panel">
+				{{triplet[1].body}}
+				</div>				
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="todo panel panel-default">
+				<div class="panel-body todo-panel">
+				{{triplet[2].body}}
+				</div>				
+			</div>
+		</div>
+	</div>
+</div>

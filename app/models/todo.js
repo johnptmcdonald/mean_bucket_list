@@ -1,6 +1,7 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 
+// rebuild this userSchema so as not to be many:many
 var TodoSchema = new Schema({
 	body: {type: String, required: true},
 	upvotes: {type: Number},
