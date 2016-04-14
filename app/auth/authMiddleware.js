@@ -12,7 +12,10 @@ function verifyToken(req, res, next){
 				})
 			} else {
 				console.log("jwt verified")
-				req.currentUser = decoded._id;
+				req.currentUser = {
+					id: decoded._id,
+					username: decoded.username
+				};
 				console.log(req.currentUser)
 				next()
 			}

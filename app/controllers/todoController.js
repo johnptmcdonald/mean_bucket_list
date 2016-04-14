@@ -16,10 +16,11 @@ function create(req, res){
 	var todo = new Todo()
 	todo.body = req.body.body;
 	todo.upvotes = 0;
-	todo.users.push(req.currentUser)
+	console.log(req.currentUser.username)
+	todo.users.push(req.currentUser.username)
 	
-	User.findById(req.currentUser, function(err, user){
-		console.log(req.currentUser)
+	User.findById(req.currentUser.id, function(err, user){
+		console.log(req.currentUser.username)
 		if(err){
 			return next(err)
 		}

@@ -85,7 +85,9 @@ angular.module('userCtrl', ['userService'])
 	
 	vm.todos = User.get(vm.user_id)
 		.success(function(data){
+			console.log(data.todos)
 			
+
 			vm.data = [];
 			var row = [];
 			for (var i = 0; i < data.todos.length; i++) {
@@ -95,7 +97,8 @@ angular.module('userCtrl', ['userService'])
 				} 
 				row.push(data.todos[i])
 			};
-			
+			vm.data.push(row)
+			console.log(vm.data)
 		}) 
 })
 

@@ -18,6 +18,7 @@ function create(req, res){
 				return res.send(err)
 			}
 		}
+		console.log("success creating user")
 		res.json({
 			success: true,
 			message: "User created"
@@ -43,11 +44,12 @@ function show(req, res){
 
 function me(req, res){
 	console.log(req.currentUser)
-	User.findById(req.currentUser, function(err, user){
+	User.findById(req.currentUser.id, function(err, user){
 		if(err){
 			res.send(err)
+		} else {
+			res.json(user)
 		}
-		res.json(user)
 	})
 }
 

@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var TodoSchema = new Schema({
 	body: {type: String, required: true},
 	upvotes: {type: Number},
-	users: [{type: mongoose.Schema.ObjectId, ref: 'User', index: true}]
+	users: [{type: String}]
 })
 
 TodoSchema.pre('remove', function(next) {

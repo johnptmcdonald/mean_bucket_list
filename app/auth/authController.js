@@ -23,7 +23,7 @@ function issueToken(req, res){
 				})
 			} else {
 				var token = jwt.sign({
-					username: user.name,
+					username: user.username,
 					_id: user._id
 				}, config.secret, {
 					expiresInMinutes: 1440
